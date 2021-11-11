@@ -32,6 +32,9 @@ const formValidator = (form, fieldsConfig, onValidateSuccess, onValidationError)
       if(rule.checkIfnum && isNaN(Number(value))&& !value.startsWith(`+`)){
         fieldValidationResult.errors.push(rule.message);      
       }
+      if(rule.text && !isNaN(Number(value))){
+        fieldValidationResult.errors.push(rule.message); 
+      }
     });
 
     if(fieldValidationResult.errors.length > 0){
@@ -90,12 +93,14 @@ const fieldsConfig = [
     rules: [
       {required: true, message: 'First name is required.'},
       {maxLength: 10, message: 'სიბოლოების რაოდენობა უნდა იყოს 10 ზე ნაკლები ან ტოლი'},
+     {text: true, message:'რიცხვების გამოყენება არ შეიძლება'}
     ]
   },
   {
     name: 'last_name',
     rules: [
       {required: true, message: 'Last name is required.'},
+      {text: true, message:'რიცხვების გამოყენება არ შეიძლება'}
     ]
   },
   {
